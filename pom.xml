@@ -7,6 +7,7 @@
     <groupId>ExercisePersonCar</groupId>
     <artifactId>ExercisePersonCar</artifactId>
     <version>1.0</version>
+    <packaging>war</packaging>
 
     <build>
         <plugins>
@@ -88,8 +89,12 @@
         <version>1.9.13</version>
     </dependency>
 
+    <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-dbcp</artifactId>
+        <version>8.5.46</version>
+    </dependency>
 
 </dependencies>
-
 
 </project>
