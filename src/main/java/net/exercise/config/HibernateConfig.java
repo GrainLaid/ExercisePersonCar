@@ -1,4 +1,5 @@
 package net.exercise.config;
+
 import java.util.Properties;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
@@ -16,13 +17,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
-import static org.hibernate.cfg.Environment.*;
 
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-@ComponentScans(value = { @ComponentScan("net.exercise.DAO"),
-        @ComponentScan("net.exercise.service") })
+@ComponentScans(value = {@ComponentScan("net.exercise.DAO"),
+        @ComponentScan("net.exercise.service")})
 public class HibernateConfig {
 
     private Environment environment;
@@ -52,14 +52,16 @@ public class HibernateConfig {
         dataSource.setPassword(environment.getRequiredProperty("jdbc.password"));
         return dataSource;
     }
+
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("net.exercise.model");
+        sessionFactory.setPackagesToScan("net.exercise.entity");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
+
     @Bean
     public HibernateTransactionManager transactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
